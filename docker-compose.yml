@@ -1,0 +1,33 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    networks:
+      - mern-network
+
+  server:
+    build: ./server
+    container_name: server
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/firestDockerdatabase
+    ports:
+      - "5001:5000"
+    depends_on:
+      - mongodb
+    networks:
+      - mern-network
+
+  client:
+    build: ./client
+    container_name: client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
