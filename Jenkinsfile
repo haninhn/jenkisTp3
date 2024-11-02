@@ -5,11 +5,11 @@ pollSCM('H/5 * * * *')
 }
 environment {
 DOCKERHUB_CREDENTIALS = credentials ( ’0000’)
-IMAGE_NAME_SERVER = ’[ username ]/ mern - server ’
-IMAGE_NAME_CLIENT = ’[ username ]/ mern - client ’
+IMAGE_NAME_SERVER = ’[ username ]/ mern - server’
+IMAGE_NAME_CLIENT = ’[ username ]/ mern - client’
 }
 stages {
-stage ( ’ Checkout ’) {
+stage ( ’Checkout’) {
 steps {
 git branch : ’main’ ,
 url : ’git@github.com:haninhn/jenkisTp3.git’ ,
@@ -98,7 +98,7 @@ $ { IMAGE_NAME_SERVER }
 }
 }
 }
-stage ( ’ Scan Client Image ’) {
+stage ( ’Scan Client Image’) {
 steps {
 script {
 sh """
@@ -112,7 +112,7 @@ $ { IMAGE_NAME_CLIENT }
 }
 }
 }
-stage ( ’ Push Images to Docker Hub ’) {steps {
+stage ( ’Push Images to Docker Hub ) {steps {
 script {
 docker . withRegistry ( ’ ’ , " $ {DOCKERHUB_CREDENTIALS}") {
 dockerImageServer . push ()
