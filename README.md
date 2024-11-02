@@ -64,17 +64,25 @@ Docker Compose est utilisé pour gérer les différents services de l'applicatio
      docker build -t mern-client .
      docker build -t serveur .
       ```
-2 Créer un réseau Docker  
+2 Créer un réseau Docker 
+      ```bash
+   docker network create mern-network
+      ```
 3 Exécuter MongoDB dans un conteneur
+      ```bash
+  docker run -d --name mongodb --network mern-network mongo
+         ```
+
 4 Exécuter les conteneurs du serveur et du client
-   ```bash
-docker run -d --name server --network mern-network -p 5001:5000 mern-server
-docker run -d --name client --network mern-network -p 3000:3000 mern-client
-```
+    ```bash
+    docker run -d --name server --network mern-network -p 5001:5000 mern-server
+    docker run -d --name client --network mern-network -p 3000:3000 mern-client
+    ```
 5 Créer un fichier Docker Compose
 6 Lancer l'application avec Docker Compose
- docker-compose up --build
-
+  ```bash
+  docker-compose up --build
+   ```
 
  ** Docker va créer un container pour chaque partie :**
 
