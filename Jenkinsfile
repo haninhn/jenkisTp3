@@ -5,8 +5,8 @@ pollSCM('H/5 * * * *')
 }
 environment {
 DOCKERHUB_CREDENTIALS = credentials ( ’0000’)
-IMAGE_NAME_SERVER = ’[ username ]/ mern - server’
-IMAGE_NAME_CLIENT = ’[ username ]/ mern - client’
+IMAGE_NAME_SERVER = ’[ username ]/ mern-server’
+IMAGE_NAME_CLIENT = ’[ username ]/ mern-client’
 }
 stages {
 stage ( ’Checkout’) {
