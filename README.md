@@ -54,3 +54,20 @@ Docker Compose est utilisé pour gérer les différents services de l'applicatio
 
 5. Accédez au client à [http://localhost:3000](http://localhost:3000).
 
+6.docker set up 
+Docker va créer un container pour chaque partie :
+
+Un container pour React (client).
+Un container pour Express (server).
+Un container pour MongoDB (base de données).
+
+
+Docker Compose orchestre ces trois containers pour qu'ils communiquent entre eux comme une seule application. Tu définis les instructions dans un fichier docker-compose.yml, et Docker Compose va tout gérer à ta place : démarrer, arrêter, construire et relier les containers.
+
+dockerfile : creation d un Dockerfile pour chaque partie de  l'application (client et serveur) qui décrit comment construire le container.
+Docker Compose : Dans le fichier docker-compose.yml, definire les services (client, serveur, MongoDB) pour qu'ils s'exécutent ensemble.
+
+## Exécution des commandes Docker :
+docker build : Construit une image Docker à partir du Dockerfile.
+docker run : Démarre un container à partir de l'image Docker construite.
+docker-compose up --build : Construit et démarre tous les containers définis dans le fichier Docker Compose.
