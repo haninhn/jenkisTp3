@@ -4,7 +4,7 @@ pipeline {
         pollSCM('H/5 * * * *')
     }
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('hanin')
+        DOCKERHUB_CREDENTIALS = credentials('githubkey')
         IMAGE_NAME_SERVER = '[username]/mern-server'
         IMAGE_NAME_CLIENT = '[username]/mern-client'
     }
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 git branch: 'main', 
                 url: 'git@github.com:haninhn/jenkisTp3.git',
-                credentialsId: 'hanin'
+                credentialsId: 'githubkey'
             }
         }
         stage('Build Server Image') {
