@@ -67,12 +67,13 @@ Docker Compose est utilisé pour gérer les différents services de l'applicatio
 2 Créer un réseau Docker 
       ```bash
       
-   docker network create mern-network
+     docker network create mern-network
       ```
 3 Exécuter MongoDB dans un conteneur
       ```bash
-  docker run -d --name mongodb --network mern-network mongo
-         ```
+      
+       docker run -d --name mongodb --network mern-network mongo
+        ```
 
 4 Exécuter les conteneurs du serveur et du client
     ```bash
