@@ -4,7 +4,7 @@ pipeline {
         pollSCM('H/5 * * * *')
     }
     environment {
-        DOCKERHUB_CREDENTIALS = credentials(0000)
+        DOCKERHUB_CREDENTIALS = credentials('hgh')
         IMAGE_NAME_SERVER = '[username]/mern-server'
         IMAGE_NAME_CLIENT = '[username]/mern-client'
     }
