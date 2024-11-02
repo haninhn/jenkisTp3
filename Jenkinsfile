@@ -13,7 +13,7 @@ stage ( ’Checkout’) {
 steps {
 git branch : ’main’ ,
 url: 'git@github.com:haninhn/jenkisTp3.git',
-credentialsId : ’b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDgFQBILY
+credentialsId: 'b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDgFQBILY
 5jMIjIFdU9zUGIAAAAGAAAAAEAAAIXAAAAB3NzaC1yc2EAAAADAQABAAACAQDDCKrn9+Sf
 gUaijpChnYvt7f2cA0MKHvax5GGzA6qR9qNkv2p9LBFWYCALqURzdD+pUGOxGmsEDJWvTN
 E4KM+ZQ0s0889GqRCJ6u0LQGmXiVOJIwEsMBgBxpEYg/wluUS47F0h6TveT4VY0R/bdFp4
@@ -60,8 +60,7 @@ tp1DWXeERJ7VI3Lxo9HbG4ZtpEQMAIyfYskducQBSYmdbYOJZH/Rh52P9sNbPSr9wEfvXk
 5FY3Q05lhLZuyADQABNWQ2fOhO7w5kspuJnMtCC3KkHm9HqxwT9cRz0m2D2nIM8Z+ljb4B
 BopTwZvUQHpcOeXleIwuh3D8AtMtVqn3Tsb7E4pRMYx8ctiuhbbJjsm1JHN+i3Q3tn3Kv4
 eR1wxEglyu8PBPPhZpU2z/PVwTrb2soGvtpBMyr43n0vMP/5W1iy2qbGP+OjwNET7V+xUC
-823xCQWLPMCwEoEyBiPCi+UwM=
-’
+823xCQWLPMCwEoEyBiPCi+UwM='
 }
 }
 stage ( ’ Build Server Image ’) {
