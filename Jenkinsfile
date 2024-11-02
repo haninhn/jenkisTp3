@@ -12,7 +12,7 @@ stages {
 stage ( ’Checkout’) {
 steps {
 git branch : ’main’ ,
-url : ’git@github.com:haninhn/jenkisTp3.git’ ,
+url: 'git@github.com:haninhn/jenkisTp3.git',
 credentialsId : ’b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDgFQBILY
 5jMIjIFdU9zUGIAAAAGAAAAAEAAAIXAAAAB3NzaC1yc2EAAAADAQABAAACAQDDCKrn9+Sf
 gUaijpChnYvt7f2cA0MKHvax5GGzA6qR9qNkv2p9LBFWYCALqURzdD+pUGOxGmsEDJWvTN
