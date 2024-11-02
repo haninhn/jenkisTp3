@@ -54,25 +54,29 @@ Docker Compose est utilisé pour gérer les différents services de l'applicatio
 
 5. Accédez au client à [http://localhost:3000](http://localhost:3000).
 
-6.docker set up 
- Créer les Dockerfiles
+## docker set up 
+1 Créer les Dockerfiles
    Dockerfile pour le client (front)
    Dockerfile pour le serveur(back)
    Construiser  l'image Docker pour le serveur et le client 
+      ```bash
+
      docker build -t mern-client .
      docker build -t serveur .
-
-Créer un réseau Docker  
-Exécuter MongoDB dans un conteneur
-Exécuter les conteneurs du serveur et du client
+      ```
+2 Créer un réseau Docker  
+3 Exécuter MongoDB dans un conteneur
+4 Exécuter les conteneurs du serveur et du client
+   ```bash
 docker run -d --name server --network mern-network -p 5001:5000 mern-server
 docker run -d --name client --network mern-network -p 3000:3000 mern-client
-Créer un fichier Docker Compose
-Lancer l'application avec Docker Compose
+```
+5 Créer un fichier Docker Compose
+6 Lancer l'application avec Docker Compose
  docker-compose up --build
 
 
-Docker va créer un container pour chaque partie :
+ ** Docker va créer un container pour chaque partie :**
 
 Un container pour React (client).
 Un container pour Express (server).
