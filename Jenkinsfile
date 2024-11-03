@@ -22,7 +22,7 @@ pipeline {
                     script {
                         dockerImageServer = docker.build("${IMAGE_NAME_SERVER}")
                         }
-                    }
+                 }
             }
         }
         stage('Build Client Image') {
