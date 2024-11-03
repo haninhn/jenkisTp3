@@ -18,9 +18,14 @@ pipeline {
                 credentialsId: 'id_ed25519'
             }
         }   
-         stage('Test Docker') {
+        stage('Install Dependencies') {
             steps {
-                sh 'docker ps'
+                dir('server') {
+                    sh 'npm install'
+                }
+                dir('client') {
+                    sh 'npm install'
+                }
             }
         }
         stage('Build Server Image') {
