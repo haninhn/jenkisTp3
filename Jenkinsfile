@@ -10,16 +10,17 @@ pipeline {
     }
 
     stages { 
-        stage('Test Docker') {
-            steps {
-                sh 'docker ps'
-            }
-        }
+    
         stage ('Checkout') {
             steps {
                 git branch: 'main', 
                 url: 'git@github.com:haninhn/jenkisTp3.git',
                 credentialsId: 'id_ed25519'
+            }
+        }   
+        stage('Test Docker') {
+            steps {
+                sh 'docker ps'
             }
         }
         stage('Build Server Image') {
