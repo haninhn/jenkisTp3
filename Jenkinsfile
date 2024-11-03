@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('id_ed25519')
-        IMAGE_NAME_SERVER = 'server/mern-server'
+        IMAGE_NAME_SERVER = 'server/mern-app-server'
         IMAGE_NAME_CLIENT = 'client/mern-client'
     }
     stages {
