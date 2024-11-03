@@ -18,11 +18,6 @@ pipeline {
                 credentialsId: 'id_ed25519'
             }
         }   
-        stage('Test Docker') {
-            steps {
-                sh 'docker ps'
-            }
-        }
         stage('Build Server Image') {
             steps {
                 dir('server') {
