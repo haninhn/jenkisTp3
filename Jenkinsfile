@@ -9,6 +9,13 @@ pipeline {
         IMAGE_NAME_CLIENT = 'mern-client'
     }
     stages {
+        stage('Test Docker') {
+            steps {
+                sh 'docker ps'
+            }
+        }
+    }
+    stages {
         stage ('Checkout') {
             steps {
                 git branch: 'main', 
