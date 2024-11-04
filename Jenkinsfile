@@ -5,8 +5,8 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhubconfig')
-        IMAGE_NAME_SERVER = 'mern-server'
-        IMAGE_NAME_CLIENT = 'mern-client'
+        IMAGE_NAME_SERVER = 'hanineguesmi/mern-server'
+        IMAGE_NAME_CLIENT = 'hanineguesmi/mern-client'
     }
 
     stages { 
