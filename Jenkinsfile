@@ -6,7 +6,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhubconfig')
         IMAGE_NAME_SERVER = 'hanineguesmi/mern-server'
-        IMAGE_NAME_CLIENT = 'hanineguesmi/mern-client'
+        IMAGE_NAME_CLIENT = 'hanineguesmi/mern-client'  
         IMAGE_TAG = 'latest'  
 
     }
@@ -61,19 +61,31 @@ pipeline {
                     }
             }
         }
-        stage('Push Images to Docker Hub') {
+        stage('Push Server Image to Docker Hub') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhubconfig', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_TOKEN')]) {
                         sh '''
                             echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
                             docker push ${IMAGE_NAME_SERVER}:${IMAGE_TAG}
+                        '''
+                    }
+                }
+            }
+    }
+
+        stage('Push Client Image to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhubconfig', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_TOKEN')]) {
+                        sh '''
+                            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
                             docker push ${IMAGE_NAME_CLIENT}:${IMAGE_TAG}
                         '''
                     }
-
                 }
             }
         }
+
     }
 }
