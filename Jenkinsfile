@@ -7,6 +7,8 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhubconfig')
         IMAGE_NAME_SERVER = 'hanineguesmi/mern-server'
         IMAGE_NAME_CLIENT = 'hanineguesmi/mern-client'
+        IMAGE_TAG = 'latest'  
+
     }
 
     stages { 
@@ -43,7 +45,7 @@ pipeline {
                     sh """      
                     docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
                     aquasec/trivy:latest image --exit-code 0 --severity LOW,MEDIUM,HIGH,CRITICAL \
-                    ${IMAGE_NAME_SERVER}
+                    ${IMAGE_NAME_SERVER}:${IMAGE_TAG}
                     """
                     }
             }
@@ -54,7 +56,7 @@ pipeline {
                     sh """
                     docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
                     aquasec/trivy:latest image --exit-code 0 --severity LOW,MEDIUM,HIGH,CRITICAL \
-                    ${IMAGE_NAME_CLIENT}
+                    ${IMAGE_NAME_CLIENT}:${IMAGE_TAG}
                      """
                     }
             }
@@ -65,12 +67,12 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhubconfig', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_TOKEN')]) {
                         sh '''
                             echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
-                            docker push ${IMAGE_NAME_SERVER}
-                            docker push ${IMAGE_NAME_CLIENT}
+                            docker push ${IMAGE_NAME_SERVER}:${IMAGE_TAG}
+                            docker push ${IMAGE_NAME_CLIENT}:${IMAGE_TAG}
                         '''
                     }
 
-                    }
+                }
             }
         }
     }
