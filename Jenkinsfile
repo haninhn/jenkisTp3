@@ -23,8 +23,10 @@ pipeline {
             steps {
                 dir('server') {
                     script {
-                        dockerImageServer = docker.build("${IMAGE_NAME_SERVER}")
+                        docker.withRegistry('https://registry-1.docker.io/', DOCKERHUB_CREDENTIALS) {
+                          dockerImageServer = docker.build("${IMAGE_NAME_SERVER}")
                         }
+                     }
                  }
             }
         }
