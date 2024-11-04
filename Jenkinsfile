@@ -62,10 +62,14 @@ pipeline {
         stage('Push Images to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('', "${DOCKERHUB_CREDENTIALS}") {
-                            dockerImageServer.push()
-                            dockerImageClient.push()
-                        }
+                    withCredentials([usernamePassword(credentialsId: 'dockerhubconfig', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_TOKEN')]) {
+                        sh '''
+                            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
+                            docker push ${IMAGE_NAME_SERVER}
+                            docker push ${IMAGE_NAME_CLIENT}
+                        '''
+                    }
+
                     }
             }
         }
