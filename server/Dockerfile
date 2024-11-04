@@ -10,8 +10,6 @@ COPY package*.json ./
 # Installer les dépendances
 RUN npm install
 
-RUN usermod -aG docker jenkins
-
 # Copier le reste des fichiers du serveur
 COPY . .
 
