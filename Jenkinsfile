@@ -18,6 +18,25 @@ pipeline {
                 credentialsId: 'id_ed25519'
             }
         }   
+    
+        stage('Build Server Image') {
+            steps {
+                dir('server') {
+                    script {
+                        dockerImageServer = docker.build("${IMAGE_NAME_SERVER}")
+                        }
+                 }
+            }
+        }
+        stage('Build Client Image') {
+            steps {
+                dir('client') {
+                    script {
+                        dockerImageClient = docker.build("${IMAGE_NAME_CLIENT}")
+                        }
+                    }
+            }
+        }
         stage('Scan Server Image') {
             steps {
                  script {
@@ -35,7 +54,7 @@ pipeline {
                     sh """
                     docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
                     aquasec/trivy:latest image --exit-code 0 --severity LOW,MEDIUM,HIGH,CRITICAL \
-                    ${IMAGE_NAME_CLIENT}
+                    {IMAGE_NAME_CLIENT}
                      """
                     }
             }
