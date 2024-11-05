@@ -62,6 +62,7 @@ pipeline {
                             ${IMAGE_NAME_CLIENT}
                         """
                     }
+                }
             }
         }
 
