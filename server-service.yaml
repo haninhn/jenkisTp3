@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mern-server-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: mern-server
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
