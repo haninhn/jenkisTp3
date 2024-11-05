@@ -41,27 +41,28 @@ pipeline {
         }
         stage('Scan Server Image') {
             steps {
-                 script {
-                    retry(4) {
-                    sh """
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
-                        -e TRIVY_TIMEOUT=${TRIVY_TIMEOUT} \\
-                        aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
-                        ${IMAGE_NAME_SERVER}
-                    """
-                    }
-                }
-            }
-        }
-        stage('Scan Client Image') {
-            steps {
                 script {
                     retry(4) {
                         sh """
                             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
-                            -e TRIVY_TIMEOUT=${TRIVY_TIMEOUT} \\
+                            -v /path/to/cache:/root/.cache \\
                             aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
-                            ${IMAGE_NAME_CLIENT}
+                            ${IMAGE_NAME_SERVER}
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Scan Client Image') {
+            steps {
+                script {
+                       retry(4) {
+                        sh """
+                            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
+                            -v /path/to/cache:/root/.cache \\
+                            aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
+                            ${IMAGE_NAME_SERVER}
                         """
                     }
                 }
