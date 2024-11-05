@@ -7,7 +7,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhubconfig')
         IMAGE_NAME_SERVER = 'hanineguesmi/mern-server'
         IMAGE_NAME_CLIENT = 'hanineguesmi/mern-client'  
-        IMAGE_TAG = 'latest'  
+        TRIVY_TIMEOUT = '10m' 
 
     }
 
@@ -43,11 +43,12 @@ pipeline {
             steps {
                  script {
                     retry(4) {
-                        sh """
-                            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
-                            aquasec/trivy:latest image --exit-code 0 --severity LOW,MEDIUM,HIGH,CRITICAL \\
-                            ${IMAGE_NAME_SERVER}
-                        """
+                    sh """
+                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
+                        -e TRIVY_TIMEOUT=${TRIVY_TIMEOUT} \\
+                        aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
+                        ${IMAGE_NAME_SERVER}
+                    """
                     }
                 }
             }
@@ -58,6 +59,7 @@ pipeline {
                     retry(4) {
                         sh """
                             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
+                            -e TRIVY_TIMEOUT=${TRIVY_TIMEOUT} \\
                             aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
                             ${IMAGE_NAME_CLIENT}
                         """
