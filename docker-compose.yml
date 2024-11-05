@@ -10,7 +10,7 @@ services:
     build: ./server
     container_name: server
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/firestDockerdatabase
+      - MONGO_URI=mongodb://mongodb:27017/employees
     ports:
       - "5001:5000"
     depends_on:
