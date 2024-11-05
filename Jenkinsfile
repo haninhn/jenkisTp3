@@ -45,7 +45,7 @@ pipeline {
                     retry(3) {
                         sh """
                             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
-                            aquasec/trivy:latest image --exit-code 0 --severity LOW,MEDIUM,HIGH,CRITICAL \\
+                            aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
                             ${IMAGE_NAME_SERVER}
                         """
                     }
@@ -58,7 +58,7 @@ pipeline {
                     retry(3) {
                         sh """
                             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\
-                            aquasec/trivy:latest image --exit-code 0 --severity LOW,MEDIUM,HIGH,CRITICAL \\
+                            aquasec/trivy:latest image --exit-code 1 --severity LOW,MEDIUM,HIGH,CRITICAL \\
                             ${IMAGE_NAME_CLIENT}
                         """
                     }
@@ -72,7 +72,6 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhubconfig', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_TOKEN')]) {
                         sh '''
                             echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
-                            docker push ${IMAGE_NAME_SERVER}
                             docker push ${IMAGE_NAME_CLIENT}
                         '''
                     }
